@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PubMed Search</title>
+</head>
+<body>
+    <h2>Search for articles on PubMed</h2>
+    <form method="post">
+        <input type="text" name="query" placeholder="Search..." required>
+        <button type="submit">Search</button>
+    </form>
+    {{ results|safe }}
+</body>
+</html>

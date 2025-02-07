@@ -1,0 +1,5 @@
+#No passwords showing
+.env
+
+.venv/
+__pycache__/
