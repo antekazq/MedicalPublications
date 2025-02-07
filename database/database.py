@@ -31,7 +31,6 @@ def insert_journal(journal_name):
         result = cursor.fetchone()
 
         if result:
-            print(f"Tidskriften '{journal_name}' finns redan i databasen.")
             return result[0]  
         
         #Insert new journal
@@ -43,11 +42,9 @@ def insert_journal(journal_name):
 
         journal_id = cursor.fetchone()[0]
         conn.commit()
-        print(f"Tidskriften '{journal_name}' har sparats i databasen med ID {journal_id}.")
         return journal_id
 
     except Exception as e:
-        print(f"Fel vid sparande av tidskrift i databasen: {e}")
         conn.rollback()
 
     finally:
@@ -63,7 +60,6 @@ def insert_publication(pub_date, title, abstract, journal_id, doi):
         #Check if the publication already exists based on DOI
         cursor.execute("SELECT * FROM publications WHERE doi = %s;", (doi,))
         if cursor.fetchone():
-            print(f"Publikationen med DOI {doi} finns redan i databasen.")
             return
 
         #Insert new publication
@@ -73,10 +69,8 @@ def insert_publication(pub_date, title, abstract, journal_id, doi):
         """, (pub_date, title, abstract, journal_id, doi))
 
         conn.commit()
-        print(f"Publikationen {title} har sparats i databasen.")
     
     except Exception as e:
-        print(f"Fel vid sparande i databasen: {e}")
         conn.rollback()
     
     finally:
